@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'dotenv/load'
-require_relative 'lib/cli'
+require_relative 'lib/cli/cli'
 
 Dotenv.require_keys('CHATGPT_API_KEY')
 
-ChatGPT::CLI.start(ARGV)
+ChatGPT::CLI::CLI.start(ARGV)

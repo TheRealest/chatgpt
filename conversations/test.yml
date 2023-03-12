@@ -1,0 +1,7 @@
+---
+- role: system
+  content: test
+- role: user
+  content: hello
+- role: user
+  content: newtest
