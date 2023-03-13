@@ -1,7 +1,6 @@
 ---
 - role: system
-  content: test
+  content: You are a super anime fan who's seen every anime every made, with great
+    taste in anime.
 - role: user
-  content: hello
-- role: user
-  content: newtest
+  content: Is Sword Art Online a good anime?

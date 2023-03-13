@@ -17,7 +17,7 @@ module ChatGPT
             temperature: TEMPERATURE,
             messages: messages
           }
-        )
+        ).parsed_response
       end
 
       private

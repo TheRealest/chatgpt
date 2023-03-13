@@ -5,23 +5,32 @@
 # two fields: role and content.
 
 require 'yaml'
+require_relative 'api'
 
 module ChatGPT
   class Conversation
     YAML_DIRECTORY = 'conversations/'
     VALID_ROLES = %w[system assistant user].freeze
 
-    attr_reader :name, :messages
+    attr_reader :name, :messages, :debug
 
-    def initialize(name)
+    def initialize(name, debug: false)
       @name = name
       @messages = YAML.load_file("#{YAML_DIRECTORY}#{name}.yml")
+      @debug = debug
     end
 
-    def add_message(role, content)
-      raise ArgumentError, 'Invalid role' unless VALID_ROLES.include?(role)
+    def get_next_message
+      response = API.send_messages(messages)
+      ap response if debug
 
-      @messages << { 'role' => role, 'content' => content }
+      add_message response.dig('choices', 0, 'message')
+    end
+
+    def add_message(message)
+      raise ArgumentError, 'Invalid role' unless VALID_ROLES.include?(message['role'])
+
+      @messages << message
       write_to_file
     end
 
