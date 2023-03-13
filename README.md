@@ -19,3 +19,5 @@ The `chatgpt` file is the entrypoint to the client. You can print the usage help
 ```
 ./chatgpt
 ```
+
+The main usage loop is to set up conversations as YAML files in the `conversations/` directory (see example there for format), then send it to ChatGPT to get the next message back. You can review conversations with commands under the `chatgpt convo` subcommand, and you can get the next message for a conversation with `chatgpt chat send CONVO_NAME` (that last command has a `-d` debug flag for printing the entire response back from the API in addition to the generated message).
