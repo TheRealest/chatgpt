@@ -20,6 +20,11 @@ module ChatGPT
         ).parsed_response
       end
 
+      # lists all model name in reverse chronological order
+      def list_models
+        client.models.list['data'].sort_by {|model| model['created']}.reverse.map {|model| model['id']}
+      end
+
       private
 
       def client

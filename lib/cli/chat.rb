@@ -14,6 +14,15 @@ module ChatGPT
 
         ConversationPresenter.new(name, convo.messages).print_conversation
       end
+
+      desc 'models', 'List available models, filtered to GPT only by default'
+      method_option :all, type: :boolean, aliases: '-a', desc: 'List all models, not just GPT'
+      def models
+        puts "Listing #{'all ' if options[:all]}models..."
+        models = API.list_models
+        models.select! {|model| model.include?('gpt') } unless options[:all]
+        puts models
+      end
     end
   end
 end
